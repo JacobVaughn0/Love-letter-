@@ -1,0 +1,125 @@
+<!--
+    ©️ 2025 Jacob
+    written by Jacob
+    UPDATE:
+    - For u, Kak sore cantik
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Love letter effect | Jacob">
+    <meta name="description" content="A love letter effect made by Jacob">
+
+    <title>Love Letter Effect by Jacob</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+        }
+
+        #message-container {
+            background-color: oklch(78.33% 0.108 326.54);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.455);
+            transition: all 1.2s ease-in-out;
+            opacity: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center flex-col w-screen h-screen">
+
+    <div id="message-container" 
+         class="flex flex-col items-center hidden overflow-y-hidden 
+                max-h-[80vh] max-w-[50vw] max-md:max-w-[70vw] 
+                max-sm:max-w-[80vw] max-sm:max-h-[80vh] py-5 rounded-2xl">
+        <div class="w-[90%] mb-auto mt-auto">
+            <article id="message" class="prose">
+                <h1>My Prettiest Girl, <span class="text-pink-600">Sore Aeshira</span></h1>
+                <p>Gadis tercantik yang pernah kulihat — tipe yang membuat dunia terasa sedikit tidak adil. Ada sesuatu dalam caranya melangkah, seolah jalanan pun tahu bahwa ia yang berkuasa di sana. Setiap senyumnya seperti cahaya sore yang jatuh di antara pepohonan, lembut tapi mampu menenangkan hal-hal yang tak bisa dijelaskan kata.</p>
+
+                <p>Tawanya seperti kekacauan kecil yang indah; sedikit berisik, tapi justru itu yang membuatnya hidup. Ia punya cara membuat kehadirannya terasa tanpa harus banyak bicara, dan entah bagaimana, semua hal di sekitarnya jadi tampak lebih berarti. Dia bisa jadi badai dan pelukan di saat bersamaan — campuran yang membuat siapa pun tak bisa benar-benar berpaling.</p>
+
+                <p>Dia bukan sekadar seseorang yang lewat di pikiranku — dia semacam pusat gravitasi yang menarik semua arah pandangku ke satu titik: dirinya. Ada sesuatu dalam dirinya yang membuat waktu berhenti, membuat hati ingin tinggal lebih lama.</p>
+
+                <p class="mt-4 italic">With All My love,</p>
+                <p class="font-semibold text-pink-700">Jacob</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="heart-container mt-2">
+        <i id="solid-heart" class="fa-solid fa-heart fa-beat fa-2x" style="color: #ff0000; cursor:pointer;"></i>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const heart = document.getElementById("solid-heart");
+            const messageContainer = document.getElementById("message-container");
+
+            let isOpened = false;
+
+            heart.addEventListener("click", () => {
+                if (!isOpened) {
+                    // tampilkan surat
+                    messageContainer.classList.remove("hidden");
+                    messageContainer.animate(
+                        [
+                            { height: "0", opacity: 0 },
+                            { height: "auto", opacity: 1 }
+                        ],
+                        {
+                            duration: 1000,
+                            easing: "ease-in-out",
+                            fill: "forwards"
+                        }
+                    );
+
+                    heart.classList.remove("fa-beat");
+                    heart.classList.add("fa-bounce");
+                    heart.style.color = "#ff4d6d";
+                    isOpened = true;
+                } else {
+                    // sembunyikan surat
+                    messageContainer.animate(
+                        [
+                            { height: messageContainer.scrollHeight + "px", opacity: 1 },
+                            { height: "0px", opacity: 0 }
+                        ],
+                        {
+                            duration: 700,
+                            easing: "ease-in-out",
+                            fill: "forwards"
+                        }
+                    ).onfinish = () => {
+                        messageContainer.classList.add("hidden");
+                    };
+
+                    heart.classList.remove("fa-bounce");
+                    heart.classList.add("fa-beat");
+                    heart.style.color = "#ff0000";
+                    isOpened = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
