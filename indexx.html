@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Love Letter Effect | Jacob</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #ffe6f3, #ffd2e0, #ffc1d6);
+            overflow: hidden;
+        }
+
+        /* Glassmorphism card */
+        #message-container {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border-radius: 22px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 1.2s ease, opacity 1s ease;
+        }
+
+        /* Fade-in stagger effect */
+        .fade-item {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col justify-center items-center h-screen">
+
+    <!-- LOVE LETTER CARD -->
+    <div id="message-container"
+        class="w-[55vw] max-md:w-[70vw] max-sm:w-[85vw] p-6">
+
+        <article id="message">
+            <h1 class="fade-item text-3xl font-bold text-pink-700 mb-3">
+                My Prettiest Girl, <span class="text-pink-600">Sore Aeshira</span>
+            </h1>
+
+            <p class="fade-item text-[16.5px] leading-relaxed mb-3">
+                Gadis tercantik yang pernah kulihat — tipe yang membuat dunia terasa sedikit tidak adil. 
+                Ada sesuatu dalam caranya melangkah, seolah jalanan pun tahu bahwa ia yang berkuasa di sana. 
+                Senyumnya seperti cahaya sore yang jatuh di antara pepohonan — lembut, hangat, dan menenangkan.
+            </p>
+
+            <p class="fade-item text-[16.5px] leading-relaxed mb-3">
+                Tawanya seperti kekacauan kecil yang indah; berisik secukupnya, tapi cukup untuk 
+                membuat hidup terasa lebih hidup. Ia hadir seperti badai yang membawa pelukan — 
+                mencampur kacau dan tenang menjadi sesuatu yang sulit dijelaskan.
+            </p>
+
+            <p class="fade-item text-[16.5px] leading-relaxed mb-3">
+                Dia bukan hanya seseorang yang lewat dalam pikiranku — dia semacam pusat gravitasi 
+                yang menarik semua arah pandangku ke satu titik: dirinya. 
+                Ada sesuatu tentangnya yang membuat waktu berhenti, membuat hati ingin tinggal lebih lama.
+            </p>
+
+            <p class="fade-item italic mt-4">With all my love,</p>
+            <p class="fade-item font-semibold text-pink-700">Jacob</p>
+        </article>
+    </div>
+
+    <!-- HEART BUTTON -->
+    <div class="mt-6">
+        <i id="solid-heart" 
+           class="fa-solid fa-heart fa-2x"
+           style="color:#ff1a4d; cursor:pointer;"></i>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const heart = document.getElementById("solid-heart");
+            const container = document.getElementById("message-container");
+            const fadeItems = document.querySelectorAll(".fade-item");
+
+            let opened = false;
+
+            heart.addEventListener("click", () => {
+                if (!opened) {
+                    // open effect
+                    container.style.maxHeight = "2000px";
+                    container.style.opacity = "1";
+
+                    heart.classList.add("fa-beat");
+
+                    // stagger fade
+                    fadeItems.forEach((el, i) => {
+                        setTimeout(() => {
+                            el.classList.add("show");
+                        }, i * 150);
+                    });
+
+                    opened = true;
+
+                } else {
+                    // close effect
+                    container.style.maxHeight = "0";
+                    container.style.opacity = "0";
+                    heart.classList.remove("fa-beat");
+
+                    fadeItems.forEach(el => el.classList.remove("show"));
+
+                    opened = false;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
